@@ -1,0 +1,28 @@
+.App{
+  background-color: #1B1B33;
+  height: 100%;
+  white-space: nowrap;
+  width: 100%;
+  position: absolute;
+  display: grid;
+  grid-template-columns: 100%;
+  grid-template-rows: 5% auto 8%;
+  grid-template-areas: 
+  "initialHeader"
+  "initalContent"
+  "initialFooter";
+}
+
+.initialHeader{
+  grid-area: initialHeader;
+}
+
+.initialContent{
+  grid-area: initalContent;
+  display: grid;
+}
+
+.initialFooter{
+  grid-area: initialFooter;
+}
+
