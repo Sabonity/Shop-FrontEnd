@@ -25,7 +25,7 @@ const Login = () => {
             const requestLogin = await axios.post('http://localhost:5000/login', userAccount);
             let { data } = requestLogin;
             let { message } = data;
-            Swal.fire({
+            await Swal.fire({
                 icon: 'success',
                 title: 'Congrats',
                 text: `${message}`
@@ -39,7 +39,7 @@ const Login = () => {
                  * status code that falls out of the range of 2xx
                  */
                 const { message } = error.response.data;
-                Swal.fire({
+                await Swal.fire({
                     icon: 'error',
                     title: 'Login Failed',
                     text: `${message}`
@@ -50,29 +50,8 @@ const Login = () => {
                 // Something happened in setting up the request and triggered an Error
                 console.log('Error', error.message);
             }
-            console.log(error.config);
         }
-        // axios.post('http://localhost:5000/login', userAccount)
-        //     .then(response => {
-        //         console.log("Success : " + response);
-        //         let { data } = response;
-        //         let { message } = data;
-        //         Swal.fire({
-        //             icon: 'success',
-        //             title: 'Congrats',
-        //             text: `${message}`
-        //         });
-        //     })
-        //     .catch(error => {
-        //         console.log("Error : " + error);
-        //         // let { data } = error;
-        //         // let { message } = data;
-        //         Swal.fire({
-        //             icon: 'error',
-        //             title: 'Congrats'
-        //         });
-        //         console.log(error.data);
-        //     });
+
 
     }
 
