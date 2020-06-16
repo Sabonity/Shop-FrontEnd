@@ -11,6 +11,11 @@ import ShopIcon from '@material-ui/icons/Shop';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import StorefrontIcon from '@material-ui/icons/Storefront';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
+import { LOGOUT } from '../actions/isLogged';
+import Content from './content/Content';
+
 
 const drawerWidth = 240;
 
@@ -45,10 +50,20 @@ const useStyles = makeStyles((theme) => ({
 const Logged = () => {
     const classes = useStyles();
 
+    const dispatch = useDispatch(); // Variable assigning to useDispatch
+
+    const { firstName } = useSelector(state => state.userData); //Get firstName of the user from the store
+    const { lastName } = useSelector(state => state.userData); //Get firstName of the user from the store
+
     const [open, setOpen] = useState(false);
 
     const handleDrawer = () => {
         setOpen(true);
+    }
+
+    const logOut = async (e) => {
+        e.preventDefault();
+        dispatch(LOGOUT());
     }
 
     const userNavigationBar = (
@@ -62,7 +77,7 @@ const Logged = () => {
                         Products
                     </Typography>
                     <Typography>
-                        Hi, User
+                        Hi, {`${firstName} ${lastName}`}
                     </Typography>
                 </Toolbar>
             </AppBar>
@@ -94,7 +109,7 @@ const Logged = () => {
                 </List>
                 <Divider />
                 <List>
-                    <ListItem button key="Logout">
+                    <ListItem button key="Logout" onClick={logOut}>
                         <ListItemIcon><ExitToAppIcon /></ListItemIcon>
                         <ListItemText primary="Logout" />
                     </ListItem>
@@ -108,7 +123,7 @@ const Logged = () => {
                 {userNavigationBar}
             </div>
             <div className="content">
-
+                <Content />
             </div>
         </div>
     )

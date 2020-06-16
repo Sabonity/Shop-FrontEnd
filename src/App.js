@@ -4,11 +4,12 @@ import Login from './components/Login';
 import Registration from './components/Registration';
 import Logged from './components/Logged';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
-// const [isUserLogged, setLogged] = useState(0);
 
 const App = () => {
-  let token = true;
+  const isLogged = useSelector(state => state.isLogged);
+  // const isLogged = true;
   const userNotLogged = (
     <Switch >
       <Route path="/" exact component={Login} />
@@ -17,7 +18,7 @@ const App = () => {
   )
 
   const userLogged = (
-   <Logged></Logged>
+    <Logged></Logged>
   )
 
   return (
@@ -25,7 +26,7 @@ const App = () => {
       <div className="App">
         <div className="initialHeader"></div>
         <div className="initialContent">
-          {token ? userLogged : userNotLogged}
+          {isLogged ? userLogged : userNotLogged}
         </div>
         <div className="initialFooter"></div>
       </div>

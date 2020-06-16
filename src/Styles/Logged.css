@@ -18,7 +18,9 @@
 
 .content {
     grid-area       : content;
-    /* background-color: black; */
+    display: grid;
+    height: 100%;
+    width: 100%;
 }
 
 .drawerMenu{

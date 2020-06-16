@@ -1,0 +1,53 @@
+.AdminProducts {
+    position             : relative;
+    display              : grid;
+    height               : 100%;
+    width                : 100%;
+    grid-template-columns: 100%;
+    grid-template-rows   : 8% auto;
+    grid-template-areas  :
+        "pNavigation"
+        "pProducts";
+}
+
+.pNavigation {
+    grid-area            : pNavigation;
+    display              : grid;
+    width                : 100%;
+    margin-bottom        : 2px;
+    grid-template-columns: 50% auto;
+    grid-template-rows   : 100%;
+    grid-template-areas  : "divViewProducts divAddProduct";
+    background-color     : #3f51b5;
+    
+}
+
+#divViewProducts {
+    display        : flex;
+    grid-area      : divViewProducts;
+    justify-content: center;
+    align-items    : center;
+    text-decoration : none;
+    border: solid white 8px;
+}
+
+#divAddProduct {
+    grid-area      : divAddProduct;
+    display        : flex;
+    justify-content: center;
+    align-items    : center;
+    text-decoration : none;
+    border: solid white 8px;
+}
+
+#viewProduct,
+#addProduct {
+    color: #fff;
+    font-weight: 600;
+    font-size: 1.2em;
+}
+
+.pProducts {
+    grid-area: pProducts;
+
+}

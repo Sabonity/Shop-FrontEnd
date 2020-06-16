@@ -10,26 +10,38 @@ import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import axios from 'axios';
 import Swal from 'sweetalert2';
+import { useDispatch } from 'react-redux';
+import { LOGIN_SUCCESS, LOGIN_FAILED, POST_USER_DATA } from '../actions/isLogged';
 
 const Login = () => {
     const [userAccount, setUserAccount] = useState({
         userName: "",
         password: ""
-    })
+    });
+
+    const dispatch = useDispatch();
 
     //Login function 
     const loginUserAccount = async e => {
         e.preventDefault();
-        console.log(userAccount);
         try {
+            //API call
             const requestLogin = await axios.post('http://localhost:5000/login', userAccount);
-            let { data } = requestLogin;
-            let { message } = data;
+            let { message } = requestLogin.data;
+            let { userData } = requestLogin.data;
+            let { access } = requestLogin.data;
+            let token = requestLogin.headers["auth-token"];
+            userData.token = token;
+            userData.access = access;
             await Swal.fire({
                 icon: 'success',
                 title: 'Congrats',
                 text: `${message}`
             });
+            console.log(requestLogin);
+            //Dispatching of action
+            dispatch(LOGIN_SUCCESS());
+            dispatch(POST_USER_DATA(userData));
         } catch (error) {
             console.log(error);
             if (error.response) {
@@ -50,6 +62,7 @@ const Login = () => {
                 // Something happened in setting up the request and triggered an Error
                 console.log('Error', error.message);
             }
+            dispatch(LOGIN_FAILED());
         }
 
 
