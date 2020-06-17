@@ -4,12 +4,12 @@ import Login from './components/Login';
 import Registration from './components/Registration';
 import Logged from './components/Logged';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-// import { useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 
 const App = () => {
-  // const isLogged = useSelector(state => state.isLogged);
-  const isLogged = true;
+  const isLogged = useSelector(state => state.isLogged);
+  // const isLogged = true;
   const userNotLogged = (
     <Switch >
       <Route path="/" exact component={Login} />

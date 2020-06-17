@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom';
 import { TextField, FormControl, Select, InputLabel, Button } from '@material-ui/core';
 import { useParams } from 'react-router';
 import '../../../styles/content/admin/Products.css';
@@ -27,7 +26,10 @@ const AdminProducts = () => {
                 setDisplaySelector(2);
             }
         }
+        console.log("Hello");
         chooseToDisplay();
+        console.log(productToDo);
+        console.log(displaySelector);
     }, []);
 
     const viewProducts = (
@@ -125,16 +127,12 @@ const AdminProducts = () => {
     return (
         <div className="AdminProducts">
             <div className="pNavigation">
-                <Link to="/" id="divViewProducts">
-                    <div id="viewProduct">
-                        View Products
-                </div>
-                </Link>
-                <Link to="/newProduct" id="divAddProduct">
-                    <div id="addProduct">
-                        Add New Product
-                </div>
-                </Link>
+                <Button variant="contained" color="primary" id="divViewProducts" href="/">
+                    View Products
+                </Button>
+                <Button variant="contained" color="primary" id="divAddProduct" href="/newProduct">
+                    Create New Product
+                </Button>
             </div >
             <div className="pProducts">
                 {(displaySelector === 1) ? viewProducts : addNewProduct}

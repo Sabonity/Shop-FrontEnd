@@ -64,6 +64,7 @@ const Logged = () => {
     const logOut = async (e) => {
         e.preventDefault();
         dispatch(LOGOUT());
+        window.location.replace('/');
     }
 
     const userNavigationBar = (

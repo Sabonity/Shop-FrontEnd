@@ -7,8 +7,31 @@ import { createStore } from 'redux';
 import allReducers from './reducers/index';
 import { Provider } from 'react-redux';
 
-const store = createStore(allReducers,
+const loadFromLocalStorage = () => {
+  try {
+    const serializedState = localStorage.getItem('state');
+    if (serializedState === null) return undefined;
+    return JSON.parse(serializedState)
+  } catch (error) {
+    return undefined;
+  }
+}
+
+const persistedState = loadFromLocalStorage();
+
+const store = createStore(allReducers, persistedState,
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
+
+const saveToLocalStorage = state => {
+  try {
+    const serializedState = JSON.stringify(state)
+    localStorage.setItem('state', serializedState)
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+store.subscribe(() => saveToLocalStorage(store.getState()));
 
 ReactDOM.render(
   <Provider store={store}>
