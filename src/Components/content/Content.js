@@ -1,6 +1,6 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+// import { useSelector } from 'react-redux';
 import '../../styles/content/Content.css'
 
 //Admin Components import
@@ -12,11 +12,12 @@ import UserProducts from './user/Products';
 
 
 const Content = () => {
-    const { access } = useSelector(state => state.userData);
-    // const access = 'admin'
+    // const { access } = useSelector(state => state.userData);
+    const access = 'admin'
     const AdminContent = (
         <Switch >
             <Route path="/" exact component={AdminProducts} />
+            <Route path="/:productToDo" exact component={AdminProducts} />
         </Switch>
     )
 

@@ -19,7 +19,7 @@
     grid-template-rows   : 100%;
     grid-template-areas  : "divViewProducts divAddProduct";
     background-color     : #3f51b5;
-    
+
 }
 
 #divViewProducts {
@@ -27,8 +27,8 @@
     grid-area      : divViewProducts;
     justify-content: center;
     align-items    : center;
-    text-decoration : none;
-    border: solid white 8px;
+    text-decoration: none;
+    border         : solid white 8px;
 }
 
 #divAddProduct {
@@ -36,18 +36,70 @@
     display        : flex;
     justify-content: center;
     align-items    : center;
-    text-decoration : none;
-    border: solid white 8px;
+    text-decoration: none;
+    border         : solid white 8px;
 }
 
 #viewProduct,
 #addProduct {
-    color: #fff;
+    color      : #fff;
     font-weight: 600;
-    font-size: 1.2em;
+    font-size  : 1.2em;
 }
 
 .pProducts {
-    grid-area: pProducts;
-
+    grid-area      : pProducts;
+    display        : flex;
+    justify-content: center;
+    align-items    : center;
 }
+
+.addNewProduct {
+    display      : inline-block;
+    height       : 90%;
+    width        : 30%;
+    border       : solid 2px rgba(77, 76, 76, 0.281);
+    border-radius: 5px;
+    text-align   : center;
+}
+
+#anpLabel {
+    display    : inline-block;
+    font-weight: 600;
+    font-size  : 2rem;
+    margin-top : 5%;
+}
+
+.anpForm {
+    position           : relative;
+    display            : flex;
+    /* background-color: turquoise; */
+    top                : 5%;
+    height             : 70%;
+    flex-direction     : column;
+    justify-content    : space-evenly;
+}
+
+#anproductNameDiv,
+#anproductCategoryDiv,
+#anproductQuantityDiv,
+#anproductPriceDiv,
+#anproductBtnDiv {
+    display    : inline-block;
+    width      : 80%;
+    margin-left: 10%;
+}
+
+
+#anpButtons {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+#anpCancel,
+#anpCreate {
+    font-size: 1.2em;
+}
+
