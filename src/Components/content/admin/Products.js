@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { TextField, FormControl, Select, InputLabel, Button } from '@material-ui/core';
+import CurrencyTextField from '@unicef/material-ui-currency-textfield'
 import { useParams } from 'react-router';
+import { useSelector } from 'react-redux';
+import axios from 'axios';
+import Swal from 'sweetalert2';
 import '../../../styles/content/admin/Products.css';
 
 
@@ -8,7 +12,7 @@ const AdminProducts = () => {
 
     const { productToDo } = useParams();
     const [displaySelector, setDisplaySelector] = useState(0);
-
+    const { token } = useSelector(state => state.userData);
     const [newProductData, setNewProductData] = useState({
         productName: '',
         category: '',
@@ -16,21 +20,14 @@ const AdminProducts = () => {
         price: 0
     });
 
+
     useEffect(() => {
-        const chooseToDisplay = () => {
-            if (productToDo == null) {
-                console.log("Pasok dito");
-                setDisplaySelector(1);
-            } else if (productToDo === 'newProduct') {
-                console.log("Dito yan");
-                setDisplaySelector(2);
-            }
+        if (productToDo === 'newProduct') {
+            setDisplaySelector(2);
+        } else if (productToDo === undefined) {
+            setDisplaySelector(1);
         }
-        console.log("Hello");
-        chooseToDisplay();
-        console.log(productToDo);
-        console.log(displaySelector);
-    }, []);
+    }, [productToDo]);
 
     const viewProducts = (
         <div className="viewProducts">
@@ -42,9 +39,53 @@ const AdminProducts = () => {
         setNewProductData({ ...newProductData, [event.target.name]: event.target.value });
     };
 
-    const createProduct = (event) => {
+    const clearInputField = () => {
+        setNewProductData({
+            productName: '',
+            category: '',
+            quantity: 0,
+            price: 0
+        });
+        window.location.replace('/products/newProduct');
+    }
+
+    const createProduct = async (event) => {
         event.preventDefault();
-        console.log(newProductData);
+        try {
+            const newProductCall = await axios.post('http://localhost:5000/product', newProductData, {
+                headers: {
+                    "auth-token": token
+                }
+            });
+            let { message } = newProductCall.data;
+            await Swal.fire({
+                icon: 'success',
+                title: 'Product creation was successful',
+                text: `${message}`
+            });
+            clearInputField();
+        } catch (error) {
+            console.log(error);
+            if (error.response) {
+                console.log(error);
+                /*
+                 * The request was made and the server responded with a
+                 * status code that falls out of the range of 2xx
+                 */
+                const { message } = error.response.data;
+                await Swal.fire({
+                    icon: 'error',
+                    title: 'Product creation was failed',
+                    text: `${message}`
+                });
+            } else if (error.request) {
+                console.log(error.request);
+            } else {
+                // Something happened in setting up the request and triggered an Error
+                console.log('Error', error.message);
+            }
+        }
+
     }
 
     const addNewProduct = (
@@ -55,12 +96,12 @@ const AdminProducts = () => {
                 <div id="anproductNameDiv">
                     <TextField
                         name="productName"
-                        id="outlined-search"
+                        id="outlined-search productName"
                         label="Product Name"
                         type="search"
                         variant="outlined"
                         style={{ width: '100%' }}
-                        defaultValue={newProductData.productName}
+                        value={newProductData.productName}
                         onChange={handleChange}
                         required
                     />
@@ -89,23 +130,26 @@ const AdminProducts = () => {
                 <div id="anproductQuantityDiv">
                     <TextField
                         name="quantity"
-                        id="outlined-search"
+                        id="outlined-search quantity"
                         label="Quantity"
                         type="number"
                         variant="outlined"
+                        defaultValue={newProductData.quantity}
                         style={{ width: '100%' }}
                         onChange={handleChange}
                         required
+                        placeholder="1"
                     />
                 </div>
                 <div id="anproductPriceDiv">
-                    <TextField
-                        name="price"
-                        id="outlined-search"
-                        label="Price"
-                        type="number"
+                    <CurrencyTextField
                         variant="outlined"
+                        currencySymbol="₱"
+                        placeholder="0.00"
                         onChange={handleChange}
+                        name="price"
+                        id="outlined-search price"
+                        label="Price"
                         style={{ width: '100%' }}
                         required
                     />
@@ -115,7 +159,7 @@ const AdminProducts = () => {
                         <Button variant="contained" color="primary" id="anpCreate" type="submit">
                             Create
                         </Button>
-                        <Button variant="contained" color="secondary" id="anpCancel" href="/">
+                        <Button variant="contained" color="secondary" id="anpCancel" href="/products">
                             Cancel
                     </Button>
                     </div>
@@ -125,12 +169,12 @@ const AdminProducts = () => {
     );
 
     return (
-        <div className="AdminProducts">
+        <div className="Products">
             <div className="pNavigation">
-                <Button variant="contained" color="primary" id="divViewProducts" href="/">
+                <Button variant="contained" color="primary" id="divViewProducts" href="/products">
                     View Products
                 </Button>
-                <Button variant="contained" color="primary" id="divAddProduct" href="/newProduct">
+                <Button variant="contained" color="primary" id="divAddProduct" href="/products/newProduct">
                     Create New Product
                 </Button>
             </div >

@@ -8,6 +8,7 @@ import { useSelector } from 'react-redux';
 
 
 const App = () => {
+
   const isLogged = useSelector(state => state.isLogged);
   // const isLogged = true;
   const userNotLogged = (

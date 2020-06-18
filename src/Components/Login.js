@@ -42,6 +42,7 @@ const Login = () => {
             //Dispatching of action
             dispatch(LOGIN_SUCCESS());
             dispatch(POST_USER_DATA(userData));
+            window.location.replace('/product');
         } catch (error) {
             console.log(error);
             if (error.response) {

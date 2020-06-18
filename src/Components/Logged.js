@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import '../styles/Logged.css';
 import { makeStyles } from '@material-ui/core/styles';
 import {
@@ -54,8 +54,19 @@ const Logged = () => {
 
     const { firstName } = useSelector(state => state.userData); //Get firstName of the user from the store
     const { lastName } = useSelector(state => state.userData); //Get firstName of the user from the store
-
+    const [navTitle, setNavTitle] = useState(undefined);
     const [open, setOpen] = useState(false);
+
+
+    useEffect(() => {
+        let url = window.location.href;
+        let title = url.split("/")[3];
+        if (title === undefined) {
+            title = "products"
+        }
+        setNavTitle(title[0].toUpperCase() +
+            title.slice(1));
+    }, [navTitle])
 
     const handleDrawer = () => {
         setOpen(true);
@@ -75,7 +86,7 @@ const Logged = () => {
                         <MenuIcon />
                     </IconButton>
                     <Typography variant="h6" className={classes.title}>
-                        Products
+                        {navTitle}
                     </Typography>
                     <Typography>
                         Hi, {`${firstName} ${lastName}`}
@@ -91,19 +102,27 @@ const Logged = () => {
                     paper: classes.drawerPaper,
                 }} >
                 <List>
-                    <ListItem button key="Products">
+                    <ListItem button key="Products" onClick={(event) => {
+                        window.location.replace(`/products`);
+                    }}>
                         <ListItemIcon><StorefrontIcon /></ListItemIcon>
                         <ListItemText primary="Products" />
                     </ListItem>
-                    <ListItem button key="Cart">
+                    <ListItem button key="Cart" name="cart" onClick={(event) => {
+                        window.location.replace(`/cart`);
+                    }}>
                         <ListItemIcon><ShoppingCartIcon /></ListItemIcon>
                         <ListItemText primary="Cart" />
                     </ListItem>
-                    <ListItem button key="Placed Order">
+                    <ListItem button key="Placed Order" onClick={(event) => {
+                        window.location.replace(`/orders`);
+                    }}>
                         <ListItemIcon><ShopIcon /></ListItemIcon>
-                        <ListItemText primary="Placed Order" />
+                        <ListItemText primary="Orders" />
                     </ListItem>
-                    <ListItem button key="Profile">
+                    <ListItem button key="Profile" onClick={(event) => {
+                        window.location.replace(`/profile`);
+                    }}>
                         <ListItemIcon><AccountCircleIcon /></ListItemIcon>
                         <ListItemText primary="Profile" />
                     </ListItem>

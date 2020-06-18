@@ -7,9 +7,9 @@ import { createStore } from 'redux';
 import allReducers from './reducers/index';
 import { Provider } from 'react-redux';
 
-const loadFromLocalStorage = () => {
+const loadFromStorage = () => {
   try {
-    const serializedState = localStorage.getItem('state');
+    const serializedState = sessionStorage.getItem('state');
     if (serializedState === null) return undefined;
     return JSON.parse(serializedState)
   } catch (error) {
@@ -17,21 +17,21 @@ const loadFromLocalStorage = () => {
   }
 }
 
-const persistedState = loadFromLocalStorage();
+const persistedState = loadFromStorage();
 
 const store = createStore(allReducers, persistedState,
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 
-const saveToLocalStorage = state => {
+const saveToStorage = state => {
   try {
     const serializedState = JSON.stringify(state)
-    localStorage.setItem('state', serializedState)
+    sessionStorage.setItem('state', serializedState)
   } catch (error) {
     console.log(error);
   }
 }
 
-store.subscribe(() => saveToLocalStorage(store.getState()));
+store.subscribe(() => saveToStorage(store.getState()));
 
 ReactDOM.render(
   <Provider store={store}>

@@ -16,8 +16,9 @@ const Content = () => {
     // const access = 'admin'
     const AdminContent = (
         <Switch >
-            <Route path="/" component={AdminProducts} />
-            <Route path="/:productToDo" component={AdminProducts} />
+            <Route exact path="/" component={AdminProducts} />
+            <Route exact path="/products" component={AdminProducts} />
+            <Route exacxt path="/products/:productToDo" component={AdminProducts} />
         </Switch>
     )
 
