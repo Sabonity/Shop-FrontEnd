@@ -38,11 +38,11 @@ const Login = () => {
                 title: 'Congrats',
                 text: `${message}`
             });
-            console.log(requestLogin);
+            // console.log(requestLogin);
             //Dispatching of action
             dispatch(LOGIN_SUCCESS());
             dispatch(POST_USER_DATA(userData));
-            window.location.replace('/product');
+            // window.location.replace('/products');
         } catch (error) {
             console.log(error);
             if (error.response) {

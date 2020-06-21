@@ -31,8 +31,9 @@
     border         : solid white 8px;
 }
 
-#divAddProduct,#divViewProducts{
-    font-size: 1.2em;
+#divAddProduct,
+#divViewProducts {
+    font-size  : 1.2em;
     font-weight: 500;
 }
 
@@ -45,19 +46,26 @@
     border         : solid white 8px;
 }
 
-#viewProduct,
-#addProduct {
-    color      : #fff;
-    font-weight: 600;
-    font-size  : 1.2em;
-}
-
 .pProducts {
     grid-area      : pProducts;
     display        : flex;
     justify-content: center;
     align-items    : center;
 }
+
+.viewProducts {
+    /* background-color: aquamarine; */
+    position: relative;
+    height: 98%;
+    width: 98%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    overflow-y: auto;
+}
+
+
 
 .addNewProduct {
     display      : inline-block;
@@ -97,9 +105,9 @@
 
 
 #anpButtons {
-    width: 100%;
-    display: flex;
-    flex-direction: row;
+    width          : 100%;
+    display        : flex;
+    flex-direction : row;
     justify-content: space-evenly;
 }
 
@@ -107,4 +115,3 @@
 #anpCreate {
     font-size: 1.2em;
 }
-

@@ -1,0 +1,14 @@
+.productForm {
+    margin-top: 5px;
+    /* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); */
+}
+
+#wordBreaker {
+    display       : inline-block;
+    word-break    : break-word;
+    white-space   : pre-line;
+    overflow-wrap : break-word;
+    word-wrap     : break-word;
+    -ms-word-break: break-word;
+    word-break    : break-word;
+}

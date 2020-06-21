@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { TextField, FormControl, Select, InputLabel, Button } from '@material-ui/core';
-import CurrencyTextField from '@unicef/material-ui-currency-textfield'
+// import CurrencyTextField from '@unicef/material-ui-currency-textfield'
 import { useParams } from 'react-router';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { POST_PRODUCTS } from '../../../actions/productsAction';
+import Product from './Product';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import '../../../styles/content/admin/Products.css';
@@ -12,6 +14,7 @@ const AdminProducts = () => {
 
     const { productToDo } = useParams();
     const [displaySelector, setDisplaySelector] = useState(0);
+    const listOfProduct = useSelector(state => state.products);
     const { token } = useSelector(state => state.userData);
     const [newProductData, setNewProductData] = useState({
         productName: '',
@@ -20,20 +23,73 @@ const AdminProducts = () => {
         price: 0
     });
 
+    const dispatch = useDispatch();
 
     useEffect(() => {
         if (productToDo === 'newProduct') {
             setDisplaySelector(2);
         } else if (productToDo === undefined) {
             setDisplaySelector(1);
+            console.log("Products list")
+            getProducts();
         }
+        async function getProducts() {
+            await fetchProducts();
+        }
+
+
     }, [productToDo]);
+
+    /*
+        Function and component for product display
+    */
+    const fetchProducts = async () => {
+        try {
+            const productList = await axios.get('http://localhost:5000/product', {
+                headers: {
+                    "auth-token": token
+                }
+            });
+            dispatch(POST_PRODUCTS(productList.data));
+        } catch (error) {
+            console.log(error);
+            if (error.response) {
+                console.log(error);
+                /*
+                 * The request was made and the server responded with a
+                 * status code that falls out of the range of 2xx
+                 */
+                const { message } = error.response.data;
+                await Swal.fire({
+                    icon: 'error',
+                    title: 'Error upon fetching of products',
+                    text: `${message}`
+                });
+            } else if (error.request) {
+                console.log(error.request);
+            } else {
+                // Something happened in setting up the request and triggered an Error
+                console.log('Error', error.message);
+            }
+        }
+    }
 
     const viewProducts = (
         <div className="viewProducts">
-            View Products
+            {
+                listOfProduct.map(product => (
+                   <Product  productName={product.productName}
+                   category={product.category} quantity={product.quantity}
+                   price={product.price} id={product._id} key={product._id}/>
+                ))
+            }
         </div>
     );
+
+
+    /*
+        Functions and component for product creation
+    */
 
     const handleChange = (event) => {
         setNewProductData({ ...newProductData, [event.target.name]: event.target.value });
@@ -142,7 +198,19 @@ const AdminProducts = () => {
                     />
                 </div>
                 <div id="anproductPriceDiv">
-                    <CurrencyTextField
+                    <TextField
+                        name="price"
+                        id="outlined-search price"
+                        label="Price"
+                        type="number"
+                        variant="outlined"
+                        style={{ width: '100%' }}
+                        onChange={handleChange}
+                        required
+                        step="0.01"
+                        placeholder="0.00"
+                    />
+                    {/* <CurrencyTextField
                         variant="outlined"
                         currencySymbol="₱"
                         placeholder="0.00"
@@ -152,7 +220,7 @@ const AdminProducts = () => {
                         label="Price"
                         style={{ width: '100%' }}
                         required
-                    />
+                    /> */}
                 </div>
                 <div id="anproductBtnDiv">
                     <div id="anpButtons">

@@ -61,11 +61,12 @@ const Logged = () => {
     useEffect(() => {
         let url = window.location.href;
         let title = url.split("/")[3];
-        if (title === undefined) {
+        if (title === undefined || title === '') {
             title = "products"
+            window.location.replace('/products');
         }
-        setNavTitle(title[0].toUpperCase() +
-            title.slice(1));
+        let tempNavTitle = title[0].toUpperCase() + title.slice(1);
+        setNavTitle(tempNavTitle);
     }, [navTitle])
 
     const handleDrawer = () => {
