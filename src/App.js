@@ -19,7 +19,7 @@ const App = () => {
   )
 
   const userLogged = (
-    <Logged></Logged>
+    <Logged/>
   )
 
   return (

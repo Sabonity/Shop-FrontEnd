@@ -2,6 +2,7 @@
 export const loggedReducer = (state = false, action) => {
     switch (action.type) {
         case 'LOGIN_SUCCESS':
+            console.log('log success');
             return true;
         case 'LOGIN_FAILED':
             return false;
