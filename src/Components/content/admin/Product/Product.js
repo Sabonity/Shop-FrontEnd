@@ -3,7 +3,7 @@ import { Button } from '@material-ui/core';
 import { useSelector } from 'react-redux';
 import Swal from 'sweetalert2';
 import Axios from 'axios';
-import '../../../styles/content/admin/Product.css';
+import '../../../../styles/content/admin/Product.css';
 
 
 const Product = ({ productName, category, price, id, quantity }) => {

@@ -10,6 +10,18 @@
         "pProducts";
 }
 
+.UserProducts {
+    position             : relative;
+    display              : grid;
+    height               : 100%;
+    width                : 100%;
+    grid-template-columns: 100%;
+    grid-template-rows   : 8% auto;
+    grid-template-areas  :
+        "pNavigation"
+        "pProducts";
+}
+
 .pNavigation {
     grid-area            : pNavigation;
     display              : grid;
@@ -54,10 +66,21 @@
 }
 
 .viewProducts {
-    /* background-color: aquamarine; */
-    position       : relative;
-    height         : 98%;
+    position       : absolute;
+    top            : 10%;
+    height         : 90%;
     width          : 98%;
+    display        : flex;
+    flex-direction : row;
+    flex-wrap      : wrap;
+    justify-content: space-between;
+    overflow-y     : auto;
+}
+
+.UserViewProducts {
+    position       : absolute;
+    height         : 100%;
+    width          : 100%;
     display        : flex;
     flex-direction : row;
     flex-wrap      : wrap;
@@ -84,11 +107,11 @@
 }
 
 .anpForm {
-    height: 90%;
-    position        : relative;
-    display         : flex;
-    flex-direction  : column;
-    justify-content : space-evenly;
+    height         : 90%;
+    position       : relative;
+    display        : flex;
+    flex-direction : column;
+    justify-content: space-evenly;
 }
 
 #anproductNameDiv,

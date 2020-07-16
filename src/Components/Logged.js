@@ -54,6 +54,7 @@ const Logged = () => {
 
     const { firstName } = useSelector(state => state.userData); //Get firstName of the user from the store
     const { lastName } = useSelector(state => state.userData); //Get firstName of the user from the store
+    const { access } = useSelector(state => state.userData) //Get firstName of the user access from the store
     const [navTitle, setNavTitle] = useState(undefined);
     const [open, setOpen] = useState(false);
 
@@ -109,18 +110,24 @@ const Logged = () => {
                         <ListItemIcon><StorefrontIcon /></ListItemIcon>
                         <ListItemText primary="Products" />
                     </ListItem>
-                    <ListItem button key="Cart" name="cart" onClick={(event) => {
-                        window.location.replace(`/cart`);
-                    }}>
-                        <ListItemIcon><ShoppingCartIcon /></ListItemIcon>
-                        <ListItemText primary="Cart" />
-                    </ListItem>
-                    <ListItem button key="Placed Order" onClick={(event) => {
-                        window.location.replace(`/orders`);
-                    }}>
-                        <ListItemIcon><ShopIcon /></ListItemIcon>
-                        <ListItemText primary="Orders" />
-                    </ListItem>
+                    {
+                        // The Cart tab is for User only while the Order tab is for admin access only
+                    }
+                    {(access === 'user') ?
+                        <ListItem button key="Cart" name="cart" onClick={(event) => {
+                            window.location.replace(`/cart`);
+                        }}>
+                            <ListItemIcon><ShoppingCartIcon /></ListItemIcon>
+                            <ListItemText primary="Cart" />
+                        </ListItem> :
+                        <ListItem button key="Placed Order" onClick={(event) => {
+                            window.location.replace(`/orders`);
+                        }}>
+                            <ListItemIcon><ShopIcon /></ListItemIcon>
+                            <ListItemText primary="Orders" />
+                        </ListItem>}
+
+
                     <ListItem button key="Profile" onClick={(event) => {
                         window.location.replace(`/profile`);
                     }}>

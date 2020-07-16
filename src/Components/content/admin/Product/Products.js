@@ -2,13 +2,13 @@ import React, { useEffect, useState } from 'react'
 import { Button } from '@material-ui/core';
 import { useParams } from 'react-router';
 import { useSelector, useDispatch } from 'react-redux';
-import { POST_PRODUCTS } from '../../../actions/productsAction';
+import { POST_PRODUCTS } from '../../../../actions/productsAction';
 import Product from './Product';
-import axios from 'axios';
+import Axios from 'axios';
 import Swal from 'sweetalert2';
 import AddProduct from './AddProduct';
 import EditProduct from './EditProduct';
-import '../../../styles/content/admin/Products.css';
+import '../../../../styles/content/admin/Products.css'
 
 
 const AdminProducts = () => {
@@ -41,7 +41,7 @@ const AdminProducts = () => {
     */
     const fetchProducts = async () => {
         try {
-            const productList = await axios.get('http://localhost:5000/product', {
+            const productList = await Axios.get('http://localhost:5000/product', {
                 headers: {
                     "auth-token": token
                 }
@@ -79,6 +79,7 @@ const AdminProducts = () => {
                         price={product.price} id={product._id} key={product._id} />
                 ))
             }
+            
         </div>
     );
 

@@ -1,0 +1,53 @@
+.itemForm {
+    margin-top           : 1%;
+    height               : 350px;
+    width                : 300px;
+    background-color     : rgba(255, 255, 255, 0.034);
+    display              : grid;
+    grid-template-columns: 100%;
+    grid-template-rows   : 40% auto 14%;
+    grid-template-areas  : "pImage""pContent""pButtons";
+    box-shadow           : 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+#iImage {
+    grid-area: pImage;
+}
+
+#iContentButton,
+#iContent {
+    display        : flex;
+    justify-content: space-evenly;
+    text-align     : center;
+}
+
+#iContent {
+    grid-area     : pContent;
+    flex-direction: column;
+}
+
+#iName {
+    font-size  : 1.2rem;
+    font-weight: 500;
+}
+
+#iButtons {
+    grid-area: pButtons;
+}
+
+#iContentButton {
+    margin-left   : 5%;
+    height        : 80%;
+    width         : 90%;
+    flex-direction: row;
+}
+
+.wordBreaker {
+    display       : inline-block;
+    word-break    : break-word;
+    white-space   : pre-line;
+    overflow-wrap : break-word;
+    word-wrap     : break-word;
+    -ms-word-break: break-word;
+    word-break    : break-word;
+}

@@ -1,0 +1,23 @@
+.Cart {
+    position             : relative;
+    display              : grid;
+    height               : 100%;
+    width                : 100%;
+    grid-template-columns: 100%;
+    grid-template-rows   : 8% auto;
+    grid-template-areas  :
+        "pNavigation"
+        "pProducts";
+}
+
+.viewCartItems {
+    position       : absolute;
+    top            : 1%;
+    height         : 99%;
+    width          : 100%;
+    display        : flex;
+    flex-direction : row;
+    flex-wrap      : wrap;
+    justify-content: space-evenly;
+    overflow-y     : auto;
+}

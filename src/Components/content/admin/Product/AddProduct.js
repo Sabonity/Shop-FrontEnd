@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { TextField, FormControl, Select, InputLabel, Button } from '@material-ui/core';
 import { useSelector } from 'react-redux';
-import '../../../styles/content/admin/Products.css';
+import '../../../../styles/content/admin/Products.css';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 // import CurrencyTextField from '@unicef/material-ui-currency-textfield'
@@ -26,6 +26,7 @@ const AddProduct = () => {
         setNewProductData({ ...newProductData, [event.target.name]: event.target.value });
     };
 
+    //Clear the input field and redirect to the products view
     const clearInputField = () => {
         setNewProductData({
             productName: '',
@@ -36,6 +37,7 @@ const AddProduct = () => {
         window.location.replace('/products/newProduct');
     }
 
+    //Function that will send the request to the server
     const createProduct = async (event) => {
         event.preventDefault();
         try {

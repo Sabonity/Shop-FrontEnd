@@ -4,11 +4,12 @@ import { useSelector } from 'react-redux';
 import '../../styles/content/Content.css'
 
 //Admin Components import
-import AdminProducts from './admin/Products';
+import AdminProducts from './admin/Product/Products';
 
 
 //User Components import
-import UserProducts from './user/Products';
+import UserProducts from './user/Product/Products';
+import UserCart from './user/Cart/Cart';
 
 
 const Content = () => {
@@ -25,6 +26,8 @@ const Content = () => {
     const UserContent = (
         <Switch >
             <Route path="/" exact component={UserProducts} />
+            <Route path="/products" exact component={UserProducts} />
+            <Route path="/cart" exact component={UserCart} />
         </Switch>
     )
 
