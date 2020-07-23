@@ -119,14 +119,14 @@ const Logged = () => {
                         }}>
                             <ListItemIcon><ShoppingCartIcon /></ListItemIcon>
                             <ListItemText primary="Cart" />
-                        </ListItem> :
-                        <ListItem button key="Placed Order" onClick={(event) => {
-                            window.location.replace(`/orders`);
-                        }}>
-                            <ListItemIcon><ShopIcon /></ListItemIcon>
-                            <ListItemText primary="Orders" />
-                        </ListItem>}
-
+                        </ListItem> : ``
+                    }
+                    <ListItem button key="Placed Order" onClick={(event) => {
+                        window.location.replace(`/orders`);
+                    }}>
+                        <ListItemIcon><ShopIcon /></ListItemIcon>
+                        <ListItemText primary="Orders" />
+                    </ListItem>
 
                     <ListItem button key="Profile" onClick={(event) => {
                         window.location.replace(`/profile`);

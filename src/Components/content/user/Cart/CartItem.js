@@ -24,14 +24,16 @@ const Item = ({ productName, price, id, quantity }) => {
                 if (value < 1) return 'The quantity should be atleast 1'
 
             }
-        });
+        })
         //Configuration of request boday
-        console.log(id);
-        let requestBody = {
-            "productId": id,
-            "quantity": parseInt(quantity)
-        };
-        await sendUpdateTheCartRequest(requestBody);
+        if (quantity) {
+            let requestBody = {
+                "productId": id,
+                "quantity": parseInt(quantity)
+            };
+            await sendUpdateTheCartRequest(requestBody);
+        }
+
     }
 
     const sendUpdateTheCartRequest = async (requestData) => {
@@ -108,7 +110,7 @@ const Item = ({ productName, price, id, quantity }) => {
                         const { message } = error.response.data;
                         await Swal.fire({
                             icon: 'error',
-                            title: 'Error upon fetching of products',
+                            title: 'Error upon deletion of item',
                             text: `${message}`
                         });
                     } else if (error.request) {

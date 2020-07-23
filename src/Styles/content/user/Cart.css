@@ -6,12 +6,39 @@
     grid-template-columns: 100%;
     grid-template-rows   : 8% auto;
     grid-template-areas  :
-        "pNavigation"
-        "pProducts";
+        "cCheckOut"
+        "cItems";
+}
+
+.cCheckOut {
+    grid-area    : cCheckOut;
+    display      : grid;
+    width        : 100%;
+    margin-bottom: 2px;
+    display        : flex;
+    justify-content: center;
+    align-items    : center;
+    text-align     : center;
+    border         : solid white 8px;
+}
+
+#divCheckOutBtn {
+    display        : flex;
+    justify-content: center;
+    align-items    : center;
+    text-decoration: none;
+    width: 40%;
+    font-size  : 1.4em;
+    font-weight: 500;
+}
+
+.cItems {
+    grid-area      : cItems;
+    position       : relative;
 }
 
 .viewCartItems {
-    position       : absolute;
+    position       : relative;
     top            : 1%;
     height         : 99%;
     width          : 100%;

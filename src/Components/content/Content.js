@@ -10,6 +10,7 @@ import AdminProducts from './admin/Product/Products';
 //User Components import
 import UserProducts from './user/Product/Products';
 import UserCart from './user/Cart/Cart';
+import UserOrder from './user/Order/Orders';
 
 
 const Content = () => {
@@ -28,6 +29,8 @@ const Content = () => {
             <Route path="/" exact component={UserProducts} />
             <Route path="/products" exact component={UserProducts} />
             <Route path="/cart" exact component={UserCart} />
+            <Route path="/orders" exact component={UserOrder} />
+            <Route path="/orders/:orderTodo" exact component={UserOrder} />
         </Switch>
     )
 
