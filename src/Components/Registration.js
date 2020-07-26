@@ -43,7 +43,6 @@ const Registration = () => {
             });
             return;
         }
-
         try {
             const requestRegistration = await axios.post('http://localhost:5000/register', regData);
             let { message } = requestRegistration.data;
@@ -52,6 +51,7 @@ const Registration = () => {
                 title: 'Congrats',
                 text: `${message}`
             });
+            window.location.replace('/');
         } catch (error) {
             console.log(error);
             if (error.response) {
@@ -63,7 +63,7 @@ const Registration = () => {
                 const { message } = error.response.data;
                 await Swal.fire({
                     icon: 'error',
-                    title: 'Login Failed',
+                    title: 'Registration Failed',
                     text: `${message}`
                 });
             } else if (error.request) {

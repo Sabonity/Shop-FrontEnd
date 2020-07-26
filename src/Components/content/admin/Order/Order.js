@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Button, Modal, Backdrop, Fade } from '@material-ui/core';
 import '../../../../styles/content/user/Order.css';
+import '../../../../styles/content/admin/Order.css';
 import OrderItem from './OrderItem.js';
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -14,7 +15,6 @@ const useStyles = makeStyles(theme => ({
         backgroundColor: theme.palette.background.paper,
         border: "2px solid white",
         boxShadow: theme.shadows[5],
-        padding: theme.spacing(2, 4, 3),
         outline: 'none'
     }
 }));
@@ -65,15 +65,25 @@ const Order = ({ price, status, message, id, cart }) => {
                 }}
             >
                 <Fade in={open}>
-                    <div className={classes.paper} id="uOrderModal">
-                        {
-                            orderedItem.map((item, index) => (
-                                <OrderItem productName={item.productName}
-                                    quantity={item.quantity}
-                                    price={item.price} id={item.productId} key={index}
-                                />
-                            ))
-                        }
+                    <div className={classes.paper} id="aOrderModal">
+                        <div className="aOrderItem">
+                            {
+                                orderedItem.map((item, index) => (
+                                    <OrderItem productName={item.productName}
+                                        quantity={item.quantity}
+                                        price={item.price} id={item.productId} key={index}
+                                    />
+                                ))
+                            }
+                        </div>
+                        <div className="aOrderButton">
+                            <Button variant="contained" color="primary" id="orderApproveBtn" type="submit">
+                                Approve
+                            </Button>
+                            <Button variant="contained" color="secondary" id="orderDeniedBtn" type="submit">
+                                Deny
+                            </Button>
+                        </div>
                     </div>
                 </Fade>
             </Modal>

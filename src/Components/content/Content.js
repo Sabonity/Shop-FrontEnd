@@ -5,6 +5,7 @@ import '../../styles/content/Content.css'
 
 //Admin Components import
 import AdminProducts from './admin/Product/Products';
+import OrderList from './admin/Order/Orders';
 
 
 //User Components import
@@ -21,6 +22,8 @@ const Content = () => {
             <Route exact path="/" component={AdminProducts} />
             <Route exact path="/products" component={AdminProducts} />
             <Route exacxt path="/products/:productToDo" component={AdminProducts} />
+            <Route path="/orders" exact component={OrderList} />
+            <Route path="/orders/:orderTodo" exact component={OrderList} />
         </Switch>
     )
 

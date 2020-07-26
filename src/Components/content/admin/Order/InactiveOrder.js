@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import Axios from 'axios';
 import Swal from 'sweetalert2';
-import Order from './Order';
+import Order from '../../user/Order/Order';
 
 const InactiveOrder = () => {
 
